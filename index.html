@@ -19,8 +19,8 @@
   <body>
     <header>
       <div class="inner">
-        <img src="images/logo.png">
-        <h2>Manage Grafana entities with easy wizzy</h2>
+        <h1>wizzy</h1>
+        <h2>Automate &amp; manage Grafana with easy wizzy</h2>
         <a href="https://github.com/utkarshcmu/wizzy" class="button"><small>View project on</small> GitHub</a>
       </div>
     </header>
@@ -61,6 +61,7 @@ $ npm -v
 </code></pre>
 
 <p>Note: Please make sure node version is above 5.10.1.</p>
+
 <ul>
 <li>Install wizzy using npm</li>
 </ul>
@@ -128,6 +129,9 @@ $ wizzy set grafana password PASSWORD
 
 <p>These commands operates directly on remote dashboards in Grafana via API, so please use them carefully. Dashboard Context(which is explained next) is not supported by these commands currently as they will interact with Grafana API directly.</p>
 
+<h3>
+<a id="dashboard-commands-1" class="anchor" href="#dashboard-commands-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dashboard Commands</h3>
+
 <pre><code>$ wizzy list dashboards
     - prints list of dashboards from Grafana in a tabular format
 $ wizzy show dashboard DASHBOARD_SLUG
@@ -142,6 +146,40 @@ $ wizzy export new-dashboard DASHBOARD_SLUG
     - exports a new local dashboard to be saved as a remote dashboard and go live
 $ wizzy delete dashboard DASHBOARD_SLUG
     - deletes a remote dashboard from Grafana
+</code></pre>
+
+<h3>
+<a id="organization-commands" class="anchor" href="#organization-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Organization Commands</h3>
+
+<pre><code>$ wizzy import orgs
+    - imports all orgs in JSON format and stores under orgs directory
+$ wizzy import org ORG_ID
+    - imports an org with ORG_ID
+$ wizzy create org ORG_NAME
+    - creates an org in Grafana
+$ wizzy show orgs
+    - shows all orgs from Grafana
+$ wizzy show org ORG_ID
+    - shows an org from Grafana
+$ wizzy delete org ORG_ID
+    - deletes an org in Grafana
+$ wizzy export org ORG_ID
+    - exports an org from local JSON to replace the one in Grafana
+</code></pre>
+
+<h3>
+<a id="datasource-commands" class="anchor" href="#datasource-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Datasource Commands</h3>
+
+<pre><code>$ wizzy import datasources
+    - imports all datasources in JSON format and store under datasources directory
+$ wizzy import datasource DATASOURCE_ID
+    - imports a datasource in JSON format and store under datasources directory
+$ wizzy show datasources
+    - shows you all the datasources in JSON
+$ wizzy show datasource DATASOURCE_ID
+    - shows you a datasource in JSON
+$ wizzy export datasource DATASOURCE_ID
+    - exports local datasource JSON object to replace the one in Grafana
 </code></pre>
 
 <h2>
@@ -159,17 +197,44 @@ $ wizzy delete dashboard DASHBOARD_SLUG
 
 <p>These commands operates on local json file based dashboards and support Dashboard Context.</p>
 
+<h3>
+<a id="dashboard-commands-2" class="anchor" href="#dashboard-commands-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dashboard Commands</h3>
+
 <pre><code>$ wizzy summarize dashboard DASHBOARD_SLUG
-    - prints summarized version of a local dashboard
-$ wizzy copy row SOURCE_ROW_NUMBER DESTINATION_ROW_NUMBER
+    - prints summary of a local dashboard
+</code></pre>
+
+<h3>
+<a id="orgs-commands" class="anchor" href="#orgs-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Orgs Commands</h3>
+
+<pre><code>$ wizzy summarize orgs
+    - prints summary of all local orgs
+</code></pre>
+
+<h3>
+<a id="datasources-commands" class="anchor" href="#datasources-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Datasources Commands</h3>
+
+<pre><code>$ wizzy summarize datasources
+    - prints summary of all local datasources
+</code></pre>
+
+<h3>
+<a id="row-commands" class="anchor" href="#row-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Row Commands</h3>
+
+<pre><code>$ wizzy copy row SOURCE_ROW_NUMBER DESTINATION_ROW_NUMBER
     - copies a row from one position to another on the same dashboard
 $ wizzy copy row SOURCE_ROW_NUMBER DESTINATION_DASHBOARD_SLUG.ROW_NUMBER
     - copies a row from one dashboard to another dashboard
 $ wizzy move row SOURCE_ROW_NUMBER DESTINATION_ROW_NUMBER
     - moves a row from one position to another on the same dashboard
 $ wizzy move row SOURCE_ROW_NUMBER DESTINATION_DASHBOARD_SLUG.ROW_NUMBER
-    - moves a row from one dashboard to another dashboard   
-$ wizzy copy panel SOURCE_ROW.PANEL_NUMBER DESTINATION_ROW_NUMBER.PANEL_NUMBER
+    - moves a row from one dashboard to another dashboard
+</code></pre>
+
+<h3>
+<a id="panel-commands" class="anchor" href="#panel-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Panel Commands</h3>
+
+<pre><code>$ wizzy copy panel SOURCE_ROW.PANEL_NUMBER DESTINATION_ROW_NUMBER.PANEL_NUMBER
     - copies a panel from current row to another row on the same dashboard
 $ wizzy copy panel SOURCE_ROW.PANEL_NUMBER DESTINATION_DASHBOARD_SLUG.ROW_NUMBER.PANEL_NUMBER
     - copies a panel from current dashboard to another dashboard
@@ -177,27 +242,22 @@ $ wizzy move panel SOURCE_ROW.PANEL_NUMBER DESTINATION_ROW_NUMBER.PANEL_NUMBER
     - moves a panel from current row to another row on the same dashboard
 $ wizzy move panel SOURCE_ROW.PANEL_NUMBER DESTINATION_DASHBOARD_SLUG.ROW_NUMBER.PANEL_NUMBER
     - moves a panel from current dashboard to another dashboard
-$ wizzy copy temp-var SOURCE_TEMP-VAR_NUMBER DESTINATION_DASHBOARD_SLUG.TEMP-VAR_NUMBER
+</code></pre>
+
+<h3>
+<a id="template-variables-commands" class="anchor" href="#template-variables-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Template Variables Commands</h3>
+
+<pre><code>$ wizzy copy temp-var SOURCE_TEMP-VAR_NUMBER DESTINATION_DASHBOARD_SLUG.TEMP-VAR_NUMBER
     - copies a template variable from current dashboard to another dashboard
 $ wizzy move temp-var SOURCE_TEMP-VAR_NUMBER DESTINATION_DASHBOARD_SLUG.TEMP-VAR_NUMBER
     - moves a template variable from current dashboard to another dashboard
+$ wizzy extract temp-var SOURCE_TEMP-VAR_NUMBER TEMP_VAR_NAME
+    - copies a template variable from current dashboard to a json file under temp-vars directory for resuse
+$ wizzy insert temp-var TEMP_VAR_NAME DASHBOARD_SLUG
+    - copies a template variable from JSON file to the specified dashboard otherwise to the context dashboard, if not specified
 </code></pre>
 
 <p>Note: wizzy removes <code>version</code> field from the imported dashboard before saving it to the disk as version is something what Grafana takes care of for a dashboard. ROW_NUMBER and PANEL_NUMBER starts from 1.</p>
-
-<h1>
-<a id="help-commands" class="anchor" href="#help-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Help Commands</h1>
-
-<p>Help commands lets you explore wizzy's info, health, configuration.</p>
-
-<pre><code>$ wizzy conf
-    - shows wizzy configuration
-$ wizzy init
-    - only to be used while setting up wizzy for the first time
-$ wizzy status
-$ wizzy help
-$ wizzy version
-</code></pre>
 
 <h1>
 <a id="set-configuration-commands" class="anchor" href="#set-configuration-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Set Configuration commands</h1>
@@ -213,18 +273,17 @@ $ wizzy set context dashboard DASHBOARD_SLUG
 </code></pre>
 
 <h1>
-<a id="organization-commands" class="anchor" href="#organization-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Organization Commands</h1>
+<a id="help-commands" class="anchor" href="#help-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Help Commands</h1>
 
-<p>These commands operates directly on Grafana via API, so please use them carefully.</p>
+<p>Help commands lets you explore wizzy's info, health, configuration.</p>
 
-<pre><code>$ wizzy create org ORG_NAME
-    - creates an org in Grafana
-$ wizzy show orgs
-    - shows all orgs from Grafana
-$ wizzy show org ORG_ID
-    - shows an org from Grafana
-$ wiizy delete org ORG_ID
-    - deletes an org in Grafana
+<pre><code>$ wizzy conf
+    - shows wizzy configuration
+$ wizzy init
+    - only to be used while setting up wizzy for the first time
+$ wizzy status
+$ wizzy help
+$ wizzy version
 </code></pre>
 
 <h1>
